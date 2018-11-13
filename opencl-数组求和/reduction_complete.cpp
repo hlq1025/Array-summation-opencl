@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define PROGRAM_FILE "reduction_complete.cl"
-#define ARRAY_SIZE 64
+#define ARRAY_SIZE 100
 #define KERNEL_1 "reduction_vector"
 #define KERNEL_2 "reduction_complete"
 
@@ -97,9 +97,9 @@ int main() {
    cl_device_id device;
    cl_context context;
    cl_program program;
-   cl_kernel vector_kernel, complete_kernel;
+   cl_kernel  complete_kernel;
    cl_command_queue queue;
-   cl_event start_event, end_event;
+   cl_event  end_event;
    cl_int i, err;
    size_t local_size, global_size;
 
@@ -107,7 +107,7 @@ int main() {
    float data[ARRAY_SIZE];
    float sum, actual_sum;
    cl_mem data_buffer, sum_buffer,sum_partial;
-   cl_ulong time_start, time_end, total_time;
+   
    global_size = ARRAY_SIZE;
    /* Initialize data */
    for(i=0; i<ARRAY_SIZE; i++) {
@@ -197,6 +197,7 @@ int main() {
    /* Check result */
    actual_sum = 1.0f * (ARRAY_SIZE/2)*(ARRAY_SIZE-1);
    cout << actual_sum << endl;
+   cout << sum << endl;
    if(fabs(sum - actual_sum) > 0.01*fabs(sum))
       printf("Check failed.\n");
    else
