@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define PROGRAM_FILE "reduction_complete.cl"
-#define ARRAY_SIZE 100
+#define ARRAY_SIZE 257
 #define KERNEL_1 "reduction_vector"
 #define KERNEL_2 "reduction_complete"
 
@@ -101,7 +101,7 @@ int main() {
    cl_command_queue queue;
    cl_event  end_event;
    cl_int i, err;
-   size_t local_size, global_size;
+   size_t  global_size;
 
    /* Data and buffers */
    float data[ARRAY_SIZE];
@@ -116,12 +116,12 @@ int main() {
 
    /* Create device and determine local size */
    device = create_device();
-   err = clGetDeviceInfo(device, CL_DEVICE_MAX_WORK_GROUP_SIZE, 	
-         sizeof(local_size), &local_size, NULL);	
-   if(err < 0) {
-      perror("Couldn't obtain device information");
-      exit(1);   
-   }
+   //err = clGetDeviceInfo(device, CL_DEVICE_MAX_WORK_GROUP_SIZE, 	
+         //sizeof(local_size), &local_size, NULL);	
+   //if(err < 0) {
+     // perror("Couldn't obtain device information");
+      //exit(1);   
+   //}
 
    /* Create a context */
    context = clCreateContext(NULL, 1, &device, NULL, NULL, &err);
@@ -195,7 +195,7 @@ int main() {
    }
 
    /* Check result */
-   actual_sum = 1.0f * (ARRAY_SIZE/2)*(ARRAY_SIZE-1);
+   actual_sum = 1.0f * ARRAY_SIZE*(ARRAY_SIZE-1)/2;
    cout << actual_sum << endl;
    cout << sum << endl;
    if(fabs(sum - actual_sum) > 0.01*fabs(sum))

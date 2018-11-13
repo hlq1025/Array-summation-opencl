@@ -1,4 +1,4 @@
-﻿生成启动时间为 2018/11/13 星期二 15:47:11。
+﻿生成启动时间为 2018/11/13 星期二 17:11:56。
      1>项目“C:\Users\Administrator\documents\visual studio 2013\Projects\opencl-数组求和\opencl-数组求和\opencl-数组求和.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          E:\softwareinstall\VS2013\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt reduction_complete.cpp
@@ -10,4 +10,4 @@
 
 生成成功。
 
-已用时间 00:00:00.60
+已用时间 00:00:00.62
