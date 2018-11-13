@@ -1,7 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define PROGRAM_FILE "reduction_complete.cl"
-
-#define ARRAY_SIZE 131072
+#define ARRAY_SIZE 64
 #define KERNEL_1 "reduction_vector"
 #define KERNEL_2 "reduction_complete"
 
@@ -107,9 +106,9 @@ int main() {
    /* Data and buffers */
    float data[ARRAY_SIZE];
    float sum, actual_sum;
-   cl_mem data_buffer, sum_buffer;
+   cl_mem data_buffer, sum_buffer,sum_partial;
    cl_ulong time_start, time_end, total_time;
-
+   global_size = ARRAY_SIZE;
    /* Initialize data */
    for(i=0; i<ARRAY_SIZE; i++) {
       data[i] = 1.0f*i;
@@ -137,6 +136,7 @@ int main() {
    /* Create data buffer */
    data_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE |
          CL_MEM_USE_HOST_PTR, ARRAY_SIZE * sizeof(float), data, &err);
+   sum_partial = clCreateBuffer(context, CL_MEM_READ_WRITE, ARRAY_SIZE * sizeof(float), data, &err);
    sum_buffer = clCreateBuffer(context, CL_MEM_WRITE_ONLY, 
          sizeof(float), NULL, &err);
    if(err < 0) {
@@ -153,20 +153,18 @@ int main() {
    };
 
    /* Create kernels */
-   vector_kernel = clCreateKernel(program, KERNEL_1, &err);
+   //vector_kernel = clCreateKernel(program, KERNEL_1, &err);
    complete_kernel = clCreateKernel(program, KERNEL_2, &err);
    if(err < 0) {
       perror("Couldn't create a kernel");
       exit(1);
    };
 
-   /* Set arguments for vector kernel */
-   err = clSetKernelArg(vector_kernel, 0, sizeof(cl_mem), &data_buffer);
-   err |= clSetKernelArg(vector_kernel, 1, local_size * 4 * sizeof(float), NULL);
+  
 
    /* Set arguments for complete kernel */
    err = clSetKernelArg(complete_kernel, 0, sizeof(cl_mem), &data_buffer);
-   err |= clSetKernelArg(complete_kernel, 1, local_size * 4 * sizeof(float), NULL);
+   err |= clSetKernelArg(complete_kernel, 1, sizeof(cl_mem), &sum_partial);
    err |= clSetKernelArg(complete_kernel, 2, sizeof(cl_mem), &sum_buffer);
    if(err < 0) {
       perror("Couldn't create a kernel argument");
@@ -174,38 +172,19 @@ int main() {
    }
 
    /* Enqueue kernels */
-   global_size = ARRAY_SIZE/4;
-   err = clEnqueueNDRangeKernel(queue, vector_kernel, 1, NULL, &global_size, 
-         &local_size, 0, NULL, &start_event);
-   if(err < 0) {
-      perror("Couldn't enqueue the kernel");
-      exit(1);   
-   }
-   printf("Global size = %lu\n", global_size);
-
-   /* Perform successive stages of the reduction */
-   while(global_size/local_size > local_size) {
-      global_size = global_size/local_size;
-      err = clEnqueueNDRangeKernel(queue, vector_kernel, 1, NULL, &global_size, 
-            &local_size, 0, NULL, NULL);
-      printf("Global size = %lu\n", global_size);
-      if(err < 0) {
-         perror("Couldn't enqueue the kernel");
-         exit(1);   
-      }
-   }
-   global_size = global_size/local_size;
+   //global_size = ARRAY_SIZE/4;
+ 
    err = clEnqueueNDRangeKernel(queue, complete_kernel, 1, NULL, &global_size, 
          NULL, 0, NULL, &end_event);
    printf("Global size = %lu\n", global_size);
 
    /* Finish processing the queue and get profiling information */
    clFinish(queue);
-   clGetEventProfilingInfo(start_event, CL_PROFILING_COMMAND_START,
-         sizeof(time_start), &time_start, NULL);
-   clGetEventProfilingInfo(end_event, CL_PROFILING_COMMAND_END,
-         sizeof(time_end), &time_end, NULL);
-   total_time = time_end - time_start;
+   //clGetEventProfilingInfo(start_event, CL_PROFILING_COMMAND_START,
+        // sizeof(time_start), &time_start, NULL);
+   //clGetEventProfilingInfo(end_event, CL_PROFILING_COMMAND_END,
+        // sizeof(time_end), &time_end, NULL);
+   //total_time = time_end - time_start;
 
    /* Read the result */
    err = clEnqueueReadBuffer(queue, sum_buffer, CL_TRUE, 0, 
@@ -222,14 +201,14 @@ int main() {
       printf("Check failed.\n");
    else
       printf("Check passed.\n");
-   printf("Total time = %lu\n", total_time);
+  // printf("Total time = %lu\n", total_time);
 
    /* Deallocate resources */
-   clReleaseEvent(start_event);
-   clReleaseEvent(end_event);
+   //clReleaseEvent(start_event);
+   //clReleaseEvent(end_event);
    clReleaseMemObject(sum_buffer);
    clReleaseMemObject(data_buffer);
-   clReleaseKernel(vector_kernel);
+   //clReleaseKernel(vector_kernel);
    clReleaseKernel(complete_kernel);
    clReleaseCommandQueue(queue);
    clReleaseProgram(program);
