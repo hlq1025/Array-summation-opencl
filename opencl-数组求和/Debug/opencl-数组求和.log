@@ -1,0 +1,34 @@
+﻿生成启动时间为 2018/11/8 星期四 15:49:09。
+     1>项目“c:\Users\administrator\documents\visual studio 2013\Projects\opencl-数组求和\opencl-数组求和\opencl-数组求和.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         E:\softwareinstall\VS2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt reduction_complete.cpp
+         reduction_complete.cpp
+       Link:
+         E:\softwareinstall\VS2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"c:\users\administrator\documents\visual studio 2013\Projects\opencl-数组求和\Debug\opencl-数组求和.exe" /INCREMENTAL /NOLOGO OpenCL.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"c:\users\administrator\documents\visual studio 2013\Projects\opencl-数组求和\Debug\opencl-数组求和.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"c:\users\administrator\documents\visual studio 2013\Projects\opencl-数组求和\Debug\opencl-数组求和.lib" /MACHINE:X86 Debug\reduction_complete.obj
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clGetPlatformIDs@12，该符号在函数 "struct _cl_device_id * __cdecl create_device(void)" (?create_device@@YAPAU_cl_device_id@@XZ) 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clGetDeviceIDs@24，该符号在函数 "struct _cl_device_id * __cdecl create_device(void)" (?create_device@@YAPAU_cl_device_id@@XZ) 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clGetDeviceInfo@20，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clCreateContext@24，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clReleaseContext@4，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clCreateCommandQueue@20，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clReleaseCommandQueue@4，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clCreateBuffer@24，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clReleaseMemObject@4，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clCreateProgramWithSource@20，该符号在函数 "struct _cl_program * __cdecl build_program(struct _cl_context *,struct _cl_device_id *,char const *)" (?build_program@@YAPAU_cl_program@@PAU_cl_context@@PAU_cl_device_id@@PBD@Z) 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clReleaseProgram@4，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clBuildProgram@24，该符号在函数 "struct _cl_program * __cdecl build_program(struct _cl_context *,struct _cl_device_id *,char const *)" (?build_program@@YAPAU_cl_program@@PAU_cl_context@@PAU_cl_device_id@@PBD@Z) 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clGetProgramBuildInfo@24，该符号在函数 "struct _cl_program * __cdecl build_program(struct _cl_context *,struct _cl_device_id *,char const *)" (?build_program@@YAPAU_cl_program@@PAU_cl_context@@PAU_cl_device_id@@PBD@Z) 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clCreateKernel@12，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clReleaseKernel@4，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clSetKernelArg@16，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clReleaseEvent@4，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clGetEventProfilingInfo@20，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clFinish@4，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clEnqueueReadBuffer@36，该符号在函数 _main 中被引用
+     1>reduction_complete.obj : error LNK2019: 无法解析的外部符号 _clEnqueueNDRangeKernel@36，该符号在函数 _main 中被引用
+     1>c:\users\administrator\documents\visual studio 2013\Projects\opencl-数组求和\Debug\opencl-数组求和.exe : fatal error LNK1120: 21 个无法解析的外部命令
+     1>已完成生成项目“c:\Users\administrator\documents\visual studio 2013\Projects\opencl-数组求和\opencl-数组求和\opencl-数组求和.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:01.93
