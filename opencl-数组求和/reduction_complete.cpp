@@ -1,6 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define PROGRAM_FILE "reduction_complete.cl"
+<<<<<<< HEAD
 #define ARRAY_SIZE 4097
+=======
+#define ARRAY_SIZE 257
+>>>>>>> f0166a17b41a87077a95b1f1a36aad20843522a0
 #define KERNEL_1 "reduction_vector"
 #define KERNEL_2 "reduction_complete"
 
@@ -15,6 +19,7 @@ using namespace std;
 
 /* Find a GPU or CPU associated with the first available platform */
 cl_device_id create_device() {
+<<<<<<< HEAD
 	cl_int			iStatus = 0;				// º¯Êý·µ»Ø×´Ì¬
 
 
@@ -277,6 +282,31 @@ cl_device_id create_device() {
 	return pDevices[0];
 
    
+=======
+
+   cl_platform_id platform;
+   cl_device_id dev;
+   int err;
+
+   /* Identify a platform */
+   err = clGetPlatformIDs(1, &platform, NULL);
+   if(err < 0) {
+      perror("Couldn't identify a platform");
+      exit(1);
+   } 
+
+   /* Access a device */
+   err = clGetDeviceIDs(platform, CL_DEVICE_TYPE_GPU, 1, &dev, NULL);
+   if(err == CL_DEVICE_NOT_FOUND) {
+      err = clGetDeviceIDs(platform, CL_DEVICE_TYPE_CPU, 1, &dev, NULL);
+   }
+   if(err < 0) {
+      perror("Couldn't access any devices");
+      exit(1);   
+   }
+
+   return dev;
+>>>>>>> f0166a17b41a87077a95b1f1a36aad20843522a0
 }
 
 /* Create program from a file and compile it */
