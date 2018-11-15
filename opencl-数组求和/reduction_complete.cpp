@@ -1,10 +1,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define PROGRAM_FILE "reduction_complete.cl"
-<<<<<<< HEAD
+
 #define ARRAY_SIZE 4097
-=======
-#define ARRAY_SIZE 257
->>>>>>> f0166a17b41a87077a95b1f1a36aad20843522a0
+
+
 #define KERNEL_1 "reduction_vector"
 #define KERNEL_2 "reduction_complete"
 
@@ -19,36 +18,36 @@ using namespace std;
 
 /* Find a GPU or CPU associated with the first available platform */
 cl_device_id create_device() {
-<<<<<<< HEAD
-	cl_int			iStatus = 0;				// º¯Êı·µ»Ø×´Ì¬
+
+	cl_int			iStatus = 0;				// å‡½æ•°è¿”å›çŠ¶æ€
 
 
 
-	cl_uint			uiNumPlatforms = 0;				// Æ½Ì¨¸öÊı
+	cl_uint			uiNumPlatforms = 0;				// å¹³å°ä¸ªæ•°
 
 
 
-	cl_platform_id	Platform = NULL;				// Ñ¡ÔñµÄÆ½Ì¨
+	cl_platform_id	Platform = NULL;				// é€‰æ‹©çš„å¹³å°
 
 
 
-	size_t			uiSize = 0;				// Æ½Ì¨°æ±¾Ãû×Ö×Ö½ÚÊı	
+	size_t			uiSize = 0;				// å¹³å°ç‰ˆæœ¬åå­—å­—èŠ‚æ•°	
 
 
 
-	cl_int			iErr = 0;				// ·µ»Ø²ÎÊı
+	cl_int			iErr = 0;				// è¿”å›å‚æ•°
 
 
 
-	char			*pName = NULL;				// Æ½Ì¨°æ±¾Ãû
+	char			*pName = NULL;				// å¹³å°ç‰ˆæœ¬å
 
 
 
-	cl_uint			uiNumDevices = 0;				// Éè±¸ÊıÁ¿
+	cl_uint			uiNumDevices = 0;				// è®¾å¤‡æ•°é‡
 
 
 
-	cl_device_id	*pDevices = NULL;				// Éè±¸
+	cl_device_id	*pDevices = NULL;				// è®¾å¤‡
 
 
 
@@ -84,11 +83,11 @@ cl_device_id create_device() {
 
 
 
-	// »ñµÃÆ½Ì¨µØÖ·
+	// è·å¾—å¹³å°åœ°å€
 
 
 
-	if (uiNumPlatforms > 0)  // Èç¹ûÓĞ¿ÉÓÃÆ½Ì¨
+	if (uiNumPlatforms > 0)  // å¦‚æœæœ‰å¯ç”¨å¹³å°
 
 
 
@@ -96,7 +95,7 @@ cl_device_id create_device() {
 
 
 
-		// ¸ù¾İÆ½Ì¨ÊıÎªÆ½Ì¨·ÖÅäÄÚ´æ¿Õ¼ä
+		// æ ¹æ®å¹³å°æ•°ä¸ºå¹³å°åˆ†é…å†…å­˜ç©ºé—´
 
 
 
@@ -108,7 +107,7 @@ cl_device_id create_device() {
 
 
 
-		// »ñµÃ¿ÉÓÃµÄÆ½Ì¨
+		// è·å¾—å¯ç”¨çš„å¹³å°
 
 
 
@@ -116,11 +115,11 @@ cl_device_id create_device() {
 
 
 
-		Platform = pPlatforms[1];	// »ñµÃµÚÒ»¸öÆ½Ì¨µÄµØÖ·
+		Platform = pPlatforms[1];	// è·å¾—ç¬¬ä¸€ä¸ªå¹³å°çš„åœ°å€
 
 
 
-		free(pPlatforms);			// ÊÍ·ÅÆ½Ì¨Õ¼ÓÃµÄÄÚ´æ¿Õ¼ä
+		free(pPlatforms);			// é‡Šæ”¾å¹³å°å ç”¨çš„å†…å­˜ç©ºé—´
 
 
 
@@ -132,11 +131,11 @@ cl_device_id create_device() {
 
 
 
-	// »ñµÃÆ½Ì¨°æ±¾Ãû
+	// è·å¾—å¹³å°ç‰ˆæœ¬å
 
 
 
-	// »ñµÃÆ½Ì¨°æ±¾ÃûµÄ×Ö½ÚÊı
+	// è·å¾—å¹³å°ç‰ˆæœ¬åçš„å­—èŠ‚æ•°
 
 
 
@@ -148,7 +147,7 @@ cl_device_id create_device() {
 
 
 
-	// ¸ù¾İ×Ö½ÚÊıÎªÆ½Ì¨°æ±¾Ãû·ÖÅäÄÚ´æ¿Õ¼ä
+	// æ ¹æ®å­—èŠ‚æ•°ä¸ºå¹³å°ç‰ˆæœ¬ååˆ†é…å†…å­˜ç©ºé—´
 
 
 
@@ -160,7 +159,7 @@ cl_device_id create_device() {
 
 
 
-	// »ñµÃÆ½Ì¨°æ±¾Ãû×Ö
+	// è·å¾—å¹³å°ç‰ˆæœ¬åå­—
 
 
 
@@ -184,11 +183,11 @@ cl_device_id create_device() {
 
 
 
-	//--------------2. ²éÑ¯GPUÉè±¸£¬²¢Ñ¡Ôñ¿ÉÓÃÉè±¸------------------------
+	//--------------2. æŸ¥è¯¢GPUè®¾å¤‡ï¼Œå¹¶é€‰æ‹©å¯ç”¨è®¾å¤‡------------------------
 
 
 
-	// »ñµÃGPUÉè±¸ÊıÁ¿
+	// è·å¾—GPUè®¾å¤‡æ•°é‡
 
 
 
@@ -196,7 +195,7 @@ cl_device_id create_device() {
 
 
 
-	if (0 == uiNumDevices)	// Èç¹ûÃ»ÓĞGPUÉè±¸
+	if (0 == uiNumDevices)	// å¦‚æœæ²¡æœ‰GPUè®¾å¤‡
 
 
 
@@ -216,7 +215,7 @@ cl_device_id create_device() {
 
 
 
-		// Ñ¡ÔñCPU×÷ÎªÉè±¸£¬»ñµÃÉè±¸Êı
+		// é€‰æ‹©CPUä½œä¸ºè®¾å¤‡ï¼Œè·å¾—è®¾å¤‡æ•°
 
 
 
@@ -228,7 +227,7 @@ cl_device_id create_device() {
 
 
 
-		// ÎªÉè±¸·ÖÅä¿Õ¼ä
+		// ä¸ºè®¾å¤‡åˆ†é…ç©ºé—´
 
 
 
@@ -240,7 +239,7 @@ cl_device_id create_device() {
 
 
 
-		// »ñµÃÆ½Ì¨
+		// è·å¾—å¹³å°
 
 
 
@@ -282,32 +281,10 @@ cl_device_id create_device() {
 	return pDevices[0];
 
    
-=======
 
-   cl_platform_id platform;
-   cl_device_id dev;
-   int err;
 
-   /* Identify a platform */
-   err = clGetPlatformIDs(1, &platform, NULL);
-   if(err < 0) {
-      perror("Couldn't identify a platform");
-      exit(1);
-   } 
-
-   /* Access a device */
-   err = clGetDeviceIDs(platform, CL_DEVICE_TYPE_GPU, 1, &dev, NULL);
-   if(err == CL_DEVICE_NOT_FOUND) {
-      err = clGetDeviceIDs(platform, CL_DEVICE_TYPE_CPU, 1, &dev, NULL);
-   }
-   if(err < 0) {
-      perror("Couldn't access any devices");
-      exit(1);   
-   }
-
-   return dev;
->>>>>>> f0166a17b41a87077a95b1f1a36aad20843522a0
-}
+  }
+   
 
 /* Create program from a file and compile it */
 cl_program build_program(cl_context ctx, cl_device_id dev, const char* filename) {
